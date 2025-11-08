@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="대전 특화 항공우주 DIY 설계 키트 - 과학 도시 대전의 미래를 설계하다">
+    <title>대전 과학 도시의 미래를 설계하다 | 지역 특화 공학 키트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background: #0a0e1a;
+            color: #e8eaf0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 86, 179, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e8eaf0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFC107;
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFC107;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 52px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4A90E2, #0056B3, #4A90E2);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 5s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        h2 {
+            font-size: 38px;
+            color: #0056B3;
+            margin-bottom: 50px;
+            text-shadow: 0 0 20px rgba(0, 86, 179, 0.3);
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #a8b2c8;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 120px;
+        }
+
+        .hero-icon {
+            font-size: 70px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 193, 7, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .problem-section {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.1), rgba(10, 14, 26, 0.8));
+            border-radius: 25px;
+            padding: 80px 60px;
+            margin: 40px 0;
+            border: 1px solid rgba(0, 86, 179, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 86, 179, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .pain-point {
+            background: rgba(255, 193, 7, 0.08);
+            border-left: 5px solid #FFC107;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .pain-point:hover {
+            transform: translateX(15px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
+            background: rgba(255, 193, 7, 0.12);
+        }
+
+        .pain-point h3 {
+            color: #FFC107;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.15), rgba(74, 144, 226, 0.08));
+            padding: 60px;
+            border-radius: 25px;
+            margin: 40px 0;
+            border: 2px solid #0056B3;
+            box-shadow: 0 15px 50px rgba(0, 86, 179, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 86, 179, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .solution-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card {
+            background: rgba(10, 14, 26, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 1px solid rgba(0, 86, 179, 0.3);
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(255, 193, 7, 0.3);
+            border-color: #FFC107;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.1), rgba(10, 14, 26, 0.9));
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 86, 179, 0.3);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255, 193, 7, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .benefit-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: #FFC107;
+            box-shadow: 0 25px 70px rgba(255, 193, 7, 0.4);
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.5));
+        }
+
+        .benefit-title {
+            font-size: 22px;
+            color: #FFC107;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .trust-table {
+            width: 100%;
+            margin: 40px 0;
+            border-collapse: separate;
+            border-spacing: 0 20px;
+        }
+
+        .trust-table tr {
+            transition: all 0.3s;
+        }
+
+        .trust-table td {
+            padding: 30px;
+            background: rgba(0, 86, 179, 0.08);
+            border: 1px solid rgba(0, 86, 179, 0.2);
+        }
+
+        .trust-table tr:hover td {
+            background: rgba(0, 86, 179, 0.15);
+            transform: translateX(10px);
+        }
+
+        .trust-table td:first-child {
+            color: #FFC107;
+            font-weight: 700;
+            width: 200px;
+            background: rgba(0, 86, 179, 0.12);
+            border-radius: 15px 0 0 15px;
+        }
+
+        .trust-table td:last-child {
+            border-radius: 0 15px 15px 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin: 60px 0;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.2), rgba(10, 14, 26, 0.9));
+            padding: 50px;
+            border-radius: 25px;
+            border: 2px solid #0056B3;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(255, 193, 7, 0.1));
+            transition: top 0.5s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 80px rgba(0, 86, 179, 0.5);
+            border-color: #FFC107;
+        }
+
+        .price-card:hover::before {
+            top: 0;
+        }
+
+        .price-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-badge {
+            background: linear-gradient(135deg, #FFC107, #FFD54F);
+            color: #0a0e1a;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .price-special {
+            font-size: 52px;
+            color: #FFC107;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .price-discount {
+            color: #0056B3;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFC107, #FFD54F);
+            color: #0a0e1a;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 40px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.7);
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            color: #FFC107;
+            font-weight: 700;
+        }
+
+        .blue-highlight {
+            color: #0056B3;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            h2 { font-size: 30px; }
+            section { padding: 70px 20px; }
+            .benefits-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            nav ul { gap: 20px; }
+            .problem-section { padding: 50px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <ul>
+            <li><a href="#problem">문제</a></li>
+            <li><a href="#solution">솔루션</a></li>
+            <li><a href="#benefits">혜택</a></li>
+            <li><a href="#trust">신뢰</a></li>
+            <li><a href="#pricing">가격</a></li>
+            <li><a href="#apply">신청</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-icon">🚀</div>
+        <h1>왜, 대전의 아이들은<br>'이론'만 배우나요?</h1>
+        <p class="subtitle">
+            '보는 과학'을 '만드는 경험'으로 바꾸는<br>
+            <span class="highlight">대전 특화 항공우주 DIY 설계 키트</span>
+        </p>
+    </section>
+
+    <section id="problem">
+        <h2>🧩 '과학 도시' 대전의 아이러니</h2>
+        <p class="subtitle">직접 만져볼 수 있는 과학은 어디에 있나요?</p>
+        
+        <div class="problem-section">
+            <p style="font-size: 20px; margin-bottom: 40px; line-height: 1.8;">
+                우리 아이들은 대한민국 과학 기술의 심장인 대전에 살고 있지만,
+            </p>
+
+            <div class="pain-point">
+                <h3>[Pain Point 1]</h3>
+                <p>눈앞의 한빛탑과 항공우주연구원의 로켓을 보면서도, 그 원리를 단순히 <span class="highlight">책이나 화면으로만</span> 배웁니다.</p>
+            </div>
+
+            <div class="pain-point">
+                <h3>[Pain Point 2]</h3>
+                <p>복잡한 공학 이론은 <span class="highlight">지루하고 어렵게</span> 느껴져, 과학 동아리 활동에 대한 흥미를 잃어버립니다.</p>
+            </div>
+
+            <div class="pain-point">
+                <h3>[Pain Point 3]</h3>
+                <p>시중에 판매되는 해외 키트는 <span class="highlight">우리 지역의 가치와 스토리를 담지 못해</span> 교육적 연계성이 떨어집니다.</p>
+            </div>
+
+            <p style="font-size: 20px; margin-top: 40px; line-height: 1.8; text-align: center; color: #4A90E2; font-weight: 700;">
+                이론과 현실 사이의 간극.<br>
+                대전의 미래 과학자들에게 손으로 만질 수 있는 생생한 공학 경험이 절실합니다.
+            </p>
+        </div>
+    </section>
+
+    <section id="solution">
+        <h2>✨ 레고의 재미, 카티아의 정교함, 대전의 스토리</h2>
+        
+        <div class="solution-box">
+            <h3 style="font-size: 28px; color: #FFC107; margin-bottom: 30px;">우리의 솔루션: 지역 특화 공학 키트 큐레이터</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                저의 <span class="highlight">3D 시각화(레고/카티아) 역량</span>과 항공우주 지식을 융합하여, 
+                대전의 상징적인 과학 인프라를 <span class="highlight">0.1mm 오차 없이</span> 정교하게 축소 모형화한 
+                프리미엄 DIY 키트를 설계 및 제작하여 제공합니다.
+            </p>
+        </div>
+
+        <div class="value-card">
+            <h3 style="font-size: 24px; color: #4A90E2; margin-bottom: 20px;">이것은 단순한 장난감이 아닙니다.</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                <span class="blue-highlight">[과학 교육]</span> 눈앞의 대전 상징물을 조립하며, 숨겨진 공학적 원리를 자연스럽게 체득합니다.
+            </p>
+            <p style="font-size: 18px; line-height: 1.8;">
+                <span class="blue-highlight">[지역 자부심]</span> 지역의 과학 자원을 직접 만지고 느끼며 <span class="highlight">'과학 도시 대전'</span>의 자부심을 키웁니다.
+            </p>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <h2>🥇 우리 키트가 드리는 3가지 혁신적인 혜택</h2>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <span class="benefit-icon">🚀</span>
+                <h3 class="benefit-title">[원리 습득]</h3>
+                <h4 style="font-size: 18px; margin-bottom: 20px; color: #e8eaf0;">눈으로만 보던 로켓의 구동 원리를 내 손으로 조립한다!</h4>
+                <p style="line-height: 1.8;">
+                    카티아 기반 정밀 설계로 실제 구조물의 메커니즘을 흉내 내는 핵심 부품을 구현하여, 
+                    단순 조립을 넘어선 공학적 이해를 돕습니다.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <span class="benefit-icon">💡</span>
+                <h3 class="benefit-title">[전문화된 교육 연계]</h3>
+                <h4 style="font-size: 18px; margin-bottom: 20px; color: #e8eaf0;">키트 설계자가 직접 제공하는 프리미엄 온라인 가이드</h4>
+                <p style="line-height: 1.8;">
+                    키트 구매 고객을 위한 온라인 조립 가이드 및 Q&A 서비스 유료 멤버십을 통해, 
+                    키트와 연계된 깊이 있는 항공우주 지식을 제공합니다.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <span class="benefit-icon">🎁</span>
+                <h3 class="benefit-title">[지역 마케팅 강화]</h3>
+                <h4 style="font-size: 18px; margin-bottom: 20px; color: #e8eaf0;">연구소/관광센터의 브랜드를 높이는 차별화된 기념품</h4>
+                <p style="line-height: 1.8;">
+                    지역 연구소, 과학 기관, 관광 센터 대상 체험 프로그램 연계 기념품 대량 납품이 가능하며, 
+                    대전 방문객에게 새로운 경험과 기념 가치를 선사합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="trust">
+        <h2>🤝 미래의 과학 인재 양성을 위한 우리의 약속</h2>
+        
+        <table class="trust-table">
+            <tr>
+                <td>MVP 형태</td>
+                <td>
+                    <strong>대전 지역 연구소 상징 구조물(예: 한빛탑, 로켓 모형)</strong>을 모티브로 한 
+                    레고/조립형 DIY 키트 1종을 카티아로 정교하게 설계하여 3D 프린팅 시제품 제작 완료.
+                </td>
+            </tr>
+            <tr>
+                <td>검증 대상 그룹</td>
+                <td>
+                    대전 지역 초/중/고등학교의 과학 동아리를 중심으로 초기 테스트 및 피드백을 진행하여 
+                    교육 효과를 극대화했습니다.
+                </td>
+            </tr>
+            <tr>
+                <td>협력 기관<br>(MVP 초기)</td>
+                <td>
+                    한국항공우주연구원, 한국천문연구원 등 대전 지역 연구 기관의 홍보팀/기념품 샵과의 
+                    초기 협의를 진행 중입니다. (브랜드 스토리 및 정품 연계 논의)
+                </td>
+            </tr>
+            <tr>
+                <td>장기 비전</td>
+                <td>
+                    대전의 '과학 도시' 이미지 강화에 기여하는 전문 키트 디자이너로서, 
+                    지속적인 지역 정주 및 협력을 목표로 합니다.
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="pricing">
+        <h2>💰 [1차 베타 테스터 한정] 특별 지원 프로그램</h2>
+        <p class="subtitle" style="text-align: center;">우리는 대전 지역 과학 교육의 활성화를 최우선 가치로 둡니다.</p>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-badge">초/중/고 과학 동아리</div>
+                <h3 style="font-size: 28px; margin: 20px 0; color: #e8eaf0;">대전 스타터 키트</h3>
+                <p style="color: #a8b2c8; margin-bottom: 20px;">(한빛탑 모형)</p>
+                <div class="price-original">정가 79,000원</div>
+                <div class="price-special">49,000원</div>
+                <div class="price-discount">40% 할인</div>
+                <a href="#apply" class="cta-button"><span>베타 테스터 신청</span></a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-badge">키트 구매 고객</div>
+                <h3 style="font-size: 28px; margin: 20px 0; color: #e8eaf0;">프리미엄 멤버십</h3>
+                <p style="color: #a8b2c8; margin-bottom: 20px;">(조립 가이드 & Q&A)</p>
+                <div class="price-original">월 9,900원</div>
+                <div class="price-special">3개월 무료</div>
+                <div class="price-discount">키트 구매시 제공</div>
+                <a href="#apply" class="cta-button"><span>문의하기</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply" style="text-align: center; padding: 120px 40px;">
+        <h2 style="font-size: 42px; margin-bottom: 30px;">🚀 대전 과학 도시의 미래를 함께 설계하세요</h2>
+        <p style="font-size: 20px; line-height: 1.8; margin-bottom: 50px; color: #a8b2c8;">
+            1차 베타 테스터는 한정 수량입니다.<br>
+            과학 동아리를 위한 특별한 기회를 놓치지 마세요.
+        </p>
+        <a href="mailto:contact@example.com" class="cta-button" style="font-size: 22px; padding: 25px 80px;">
+            <span>지금 신청하기 →</span>
+        </a>
+    </section>
+
+    <script>
+        // 별 생성
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 2.5 + 0.5 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (Math
